@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<!-- ============================================================
+     PODOCLINIC — Landing Page Completa
+     Versão: 2.0 (estilo institucional premium)
+     Última edição: 2026-06-10
+     HTML + CSS + JS leve, autocontido, mobile-first.
+     Referência de estrutura: qualylifesaude.com.br
+     ============================================================ -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Podoclinic — Novo conceito em podologia | Brooklin, SP</title>
+  <meta name="description" content="Podologia especializada no Brooklin, SP. Mais de 20 anos de experiência, atendimento humanizado, biossegurança rigorosa e estacionamento no local. Agende sua consulta." />
+  <meta property="og:title" content="Podoclinic — Novo conceito em podologia" />
+  <meta property="og:description" content="Podologia especializada no Brooklin, SP. Atendimento humanizado e mais de 20 anos de experiência." />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="theme-color" content="#1E5C2D" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+
+    /* ============================================================
+       1. DESIGN TOKENS
+       ============================================================ */
+    :root {
+      --cor-verde:        #2B8040;
+      --cor-verde-escuro: #1E5C2D;
+      --cor-verde-noite:  #143D1F;
+      --cor-verde-claro:  #3DA058;
+      --cor-verde-menta:  #E8F5EC;
+      --cor-verde-borda:  #D4EDD9;
+      --cor-verde-accent: #6FCF8A;
+
+      --cor-preto:        #1A1A1A;
+      --cor-cinza-escuro: #4A4A4A;
+      --cor-cinza-medio:  #777777;
+      --cor-cinza-borda:  #E5E5E5;
+      --cor-creme:        #FAFBF8;
+      --cor-branco:       #FFFFFF;
+
+      --fonte-base:   'Inter', Arial, sans-serif;
+      --fonte-titulo: 'Fraunces', Georgia, serif;
+
+      --sombra-media:  0 8px 28px rgba(27, 80, 40, .12);
+      --sombra-botao:  0 4px 16px rgba(43, 128, 64, .35);
+      --sombra-botao-hover: 0 8px 28px rgba(43, 128, 64, .40);
+
+      --raio-medio:  14px;
+      --raio-grande: 20px;
+      --raio-pill:   999px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--fonte-base);
+      color: var(--cor-preto);
+      background: var(--cor-branco);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin-inline: auto;
+      padding-inline: 20px;
+    }
+
+    /* — Tipografia de seção — */
+    .eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cor-verde);
+      margin-bottom: 12px;
+    }
+
+    .titulo {
+      font-family: var(--fonte-titulo);
+      font-weight: 600;
+      font-size: clamp(28px, 4.2vw, 42px);
+      line-height: 1.18;
+      letter-spacing: -0.5px;
+      color: var(--cor-preto);
+    }
+
+    .titulo em {
+      font-style: italic;
+      color: var(--cor-verde);
+    }
+
+    .sub {
+      margin-top: 14px;
+      font-size: 17px;
+      color: var(--cor-cinza-escuro);
+      max-width: 620px;
+    }
+
+    /* — Botões — */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--cor-verde);
+      color: var(--cor-branco);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 15px 30px;
+      border: none;
+      cursor: pointer;
+      border-radius: var(--raio-pill);
+      box-shadow: var(--sombra-botao);
+      transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
+      font-family: var(--fonte-base);
+    }
+    .btn:hover {
+      background: var(--cor-verde-escuro);
+      box-shadow: var(--sombra-botao-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn--fantasma {
+      background: transparent;
+      color: var(--cor-verde-escuro);
+      border: 2px solid var(--cor-verde-borda);
+      box-shadow: none;
+    }
+    .btn--fantasma:hover {
+      background: var(--cor-verde-menta);
+      border-color: var(--cor-verde);
+      box-shadow: none;
+    }
+
+    /* ============================================================
+       2. NAVEGAÇÃO FIXA
+       ============================================================ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--cor-verde-borda);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-block: 12px;
+    }
+
+    /* — Logo Podoclinic (vetorial) — */
+    .logo-marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--cor-verde);
+    }
+
+    .logo-marca__texto {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-marca__nome {
+      font-family: 'Poppins', var(--fonte-base);
+      font-weight: 700;
+      font-size: 21px;
+      letter-spacing: .3px;
+      color: var(--cor-verde);
+    }
+
+    .logo-marca__sub {
+      font-family: 'Poppins', var(--fonte-base);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: .2px;
+      color: var(--cor-verde);
+      margin-top: 3px;
+    }
+
+    .logo-marca__pes {
+      height: 34px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    /* Variante clara (fundo escuro do rodapé) */
+    .logo-marca--claro,
+    .logo-marca--claro .logo-marca__nome {
+      color: var(--cor-branco);
+    }
+    .logo-marca--claro .logo-marca__sub {
+      color: var(--cor-verde-accent);
+    }
+    .logo-marca--claro .logo-marca__pes {
+      color: var(--cor-verde-accent);
+    }
+
+    .nav__links {
+      display: none;
+      gap: 28px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--cor-cinza-escuro);
+    }
+    .nav__links a { transition: color .2s ease; }
+    .nav__links a:hover { color: var(--cor-verde); }
+
+    .nav__cta {
+      font-size: 14px;
+      padding: 11px 22px;
+      box-shadow: none;
+    }
+
+    /* ============================================================
+       3. HERO
+       ============================================================ */
+    .hero {
+      background:
+        radial-gradient(ellipse 80% 60% at 85% 10%, rgba(111, 207, 138, .18), transparent 60%),
+        linear-gradient(180deg, var(--cor-verde-menta) 0%, var(--cor-branco) 88%);
+      padding: 64px 0 56px;
+      text-align: center;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--cor-branco);
+      border: 1px solid var(--cor-verde-borda);
+      color: var(--cor-verde-escuro);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: var(--raio-pill);
+      margin-bottom: 26px;
+      box-shadow: 0 1px 3px rgba(27, 80, 40, .08);
+    }
+
+    .hero__titulo {
+      font-family: var(--fonte-titulo);
+      font-weight: 600;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: 1.12;
+      letter-spacing: -1px;
+      color: var(--cor-verde-noite);
+      max-width: 760px;
+      margin-inline: auto;
+    }
+
+    .hero__titulo em {
+      font-style: italic;
+      color: var(--cor-verde);
+    }
+
+    .hero__sub {
+      margin: 18px auto 32px;
+      max-width: 560px;
+      font-size: 18px;
+      color: var(--cor-cinza-escuro);
+    }
+
+    .hero__acoes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    /* — Faixa de estatísticas — */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 720px;
+      margin: 48px auto 0;
+    }
+
+    .stat {
+      background: var(--cor-branco);
+      border: 1px solid var(--cor-verde-borda);
+      border-radius: var(--raio-grande);
+      padding: 20px 12px;
+    }
+
+    .stat__numero {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 600;
+      color: var(--cor-verde);
+      line-height: 1.1;
+    }
+
+    .stat__rotulo {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cor-cinza-medio);
+      margin-top: 4px;
+    }
+
+    /* ============================================================
+       4. A CLÍNICA
+       ============================================================ */
+    .clinica {
+      padding: 80px 0;
+    }
+
+    .clinica__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .clinica__lista {
+      list-style: none;
+      margin-top: 24px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .clinica__lista li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 16px;
+      color: var(--cor-cinza-escuro);
+    }
+
+    .clinica__check {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--cor-verde-menta);
+      color: var(--cor-verde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    /* Painel visual decorativo (substituível por foto real) */
+    .clinica__painel {
+      position: relative;
+      border-radius: var(--raio-grande);
+      overflow: hidden;
+      background: linear-gradient(150deg, var(--cor-verde-escuro), var(--cor-verde) 70%, var(--cor-verde-claro));
+      min-height: 320px;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: var(--sombra-media);
+    }
+    .clinica__painel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 80% 15%, rgba(255,255,255,.16), transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(255,255,255,.10), transparent 40%);
+    }
+
+    .clinica__painel-conteudo {
+      position: relative;
+      padding: 28px;
+      color: var(--cor-branco);
+    }
+
+    .clinica__painel-conteudo .painel-titulo {
+      font-family: var(--fonte-titulo);
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .clinica__painel-conteudo .painel-texto {
+      margin-top: 8px;
+      font-size: 14px;
+      opacity: .85;
+      max-width: 360px;
+    }
+
+    /* ============================================================
+       5. POR QUE ESCOLHER — 6 cards
+       ============================================================ */
+    .porque {
+      background: var(--cor-creme);
+      padding: 80px 0;
+    }
+
+    .porque__cabecalho { text-align: center; margin-bottom: 44px; }
+    .porque__cabecalho .sub { margin-inline: auto; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--cor-branco);
+      border: 1px solid var(--cor-verde-borda);
+      border-radius: var(--raio-grande);
+      padding: 30px 26px;
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+    .card:hover {
+      box-shadow: var(--sombra-media);
+      transform: translateY(-4px);
+    }
+
+    .card__icone {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--raio-medio);
+      background: var(--cor-verde-menta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cor-verde);
+      margin-bottom: 18px;
+    }
+
+    .card__titulo {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .card__texto {
+      font-size: 15px;
+      color: var(--cor-cinza-escuro);
+    }
+
+    /* ============================================================
+       6. TRATAMENTOS — lista numerada
+       ============================================================ */
+    .tratamentos {
+      padding: 80px 0;
+    }
+
+    .tratamentos__cabecalho { text-align: center; margin-bottom: 44px; }
+    .tratamentos__cabecalho .sub { margin-inline: auto; }
+
+    .tratamentos__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .tratamento {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      border: 1px solid var(--cor-cinza-borda);
+      border-radius: var(--raio-grande);
+      padding: 26px 24px;
+      transition: border-color .2s ease, box-shadow .25s ease;
+    }
+    .tratamento:hover {
+      border-color: var(--cor-verde-borda);
+      box-shadow: var(--sombra-media);
+    }
+
+    .tratamento__numero {
+      font-family: var(--fonte-titulo);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--cor-verde-accent);
+      line-height: 1;
+      min-width: 48px;
+    }
+
+    .tratamento__titulo {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .tratamento__texto {
+      font-size: 15px;
+      color: var(--cor-cinza-escuro);
+    }
+
+    /* ============================================================
+       7. DEPOIMENTOS
+       ============================================================ */
+    .depoimentos {
+      background: var(--cor-verde-escuro);
+      color: var(--cor-branco);
+      padding: 80px 0;
+    }
+
+    .depoimentos__cabecalho { text-align: center; margin-bottom: 44px; }
+    .depoimentos .titulo { color: var(--cor-branco); }
+    .depoimentos .titulo em { color: var(--cor-verde-accent); }
+    .depoimentos .eyebrow { color: var(--cor-verde-accent); }
+
+    .depoimentos__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .depoimento {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: var(--raio-grande);
+      padding: 28px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .depoimento__estrelas {
+      color: #F5C518;
+      font-size: 15px;
+      letter-spacing: 3px;
+    }
+
+    .depoimento__texto {
+      font-size: 15.5px;
+      line-height: 1.7;
+      opacity: .95;
+      font-style: italic;
+    }
+
+    .depoimento__autor {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .depoimento__autor span {
+      display: block;
+      font-weight: 500;
+      font-size: 13px;
+      opacity: .65;
+      margin-top: 2px;
+    }
+
+    /* ============================================================
+       8. CONTATO — informações + formulário WhatsApp
+       ============================================================ */
+    .contato {
+      padding: 80px 0;
+      background: linear-gradient(180deg, var(--cor-branco) 0%, var(--cor-verde-menta) 100%);
+    }
+
+    .contato__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .contato__info {
+      display: grid;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .contato__bloco {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .contato__icone {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--raio-medio);
+      background: var(--cor-branco);
+      border: 1px solid var(--cor-verde-borda);
+      color: var(--cor-verde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contato__bloco h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--cor-verde-escuro);
+    }
+
+    .contato__bloco p {
+      font-size: 15px;
+      color: var(--cor-cinza-escuro);
+    }
+
+    .contato__bloco a.link-mapa {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--cor-verde);
+      margin-top: 2px;
+    }
+    .contato__bloco a.link-mapa:hover { color: var(--cor-verde-escuro); }
+
+    /* ============================================================
+       9. FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--cor-verde-noite);
+      color: var(--cor-branco);
+      padding: 56px 0 28px;
+      font-size: 14px;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .footer__marca .logo-marca {
+      margin-bottom: 14px;
+    }
+    .footer__marca .logo-marca__pes {
+      height: 38px;
+    }
+
+    .footer__marca p {
+      opacity: .75;
+      max-width: 300px;
+    }
+
+    .footer h4 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--cor-verde-accent);
+      margin-bottom: 14px;
+    }
+
+    .footer ul { list-style: none; display: grid; gap: 8px; }
+    .footer ul a { opacity: .8; transition: opacity .2s ease; }
+    .footer ul a:hover { opacity: 1; }
+    .footer ul li { opacity: .8; }
+
+    .footer__base {
+      border-top: 1px solid rgba(255, 255, 255, .14);
+      padding-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+      text-align: center;
+      font-size: 13px;
+      opacity: .65;
+    }
+
+    /* ============================================================
+       10. BOTÃO FLUTUANTE WHATSAPP
+       ============================================================ */
+    .whats-flutuante {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
+      transition: transform .2s ease;
+    }
+    .whats-flutuante:hover { transform: scale(1.08); }
+    .whats-flutuante svg { width: 30px; height: 30px; fill: #fff; }
+
+    /* ============================================================
+       11. RESPONSIVIDADE
+       ============================================================ */
+    @media (min-width: 768px) {
+      .nav__links { display: flex; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .tratamentos__grid { grid-template-columns: repeat(2, 1fr); }
+      .depoimentos__grid { grid-template-columns: repeat(3, 1fr); }
+      .clinica__grid { grid-template-columns: 1.1fr 1fr; }
+      .contato__grid { grid-template-columns: 1fr; }
+      .footer__grid { grid-template-columns: 1.4fr 1fr 1fr; }
+      .hero { padding: 88px 0 72px; }
+    }
+
+    @media (min-width: 1024px) {
+      .cards { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVEGAÇÃO
+       ============================================================ -->
+  <nav class="nav" aria-label="Navegação principal">
+    <div class="container nav__inner">
+
+      <a class="nav__logo logo-marca" href="#topo" aria-label="Podoclinic — início">
+        <span class="logo-marca__texto">
+          <span class="logo-marca__nome">PODOCLINIC</span>
+          <span class="logo-marca__sub">Clínica de Podologia</span>
+        </span>
+        <svg class="logo-marca__pes" viewBox="0 0 210 260" fill="currentColor" aria-hidden="true">
+          <g transform="rotate(14 60 110)">
+            <ellipse cx="60" cy="135" rx="30" ry="57"/>
+            <ellipse cx="32" cy="56" rx="12" ry="14"/>
+            <circle cx="54" cy="41" r="9"/>
+            <circle cx="71" cy="35" r="8"/>
+            <circle cx="86" cy="37" r="7"/>
+            <circle cx="98" cy="44" r="6"/>
+          </g>
+          <g transform="translate(76 52) scale(.94) rotate(20 60 110)">
+            <ellipse cx="60" cy="135" rx="30" ry="57"/>
+            <ellipse cx="32" cy="56" rx="12" ry="14"/>
+            <circle cx="54" cy="41" r="9"/>
+            <circle cx="71" cy="35" r="8"/>
+            <circle cx="86" cy="37" r="7"/>
+            <circle cx="98" cy="44" r="6"/>
+          </g>
+        </svg>
+      </a>
+
+      <div class="nav__links">
+        <a href="#clinica">A Clínica</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#tratamentos">Tratamentos</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
+      </div>
+
+      <a class="btn nav__cta" href="https://wa.me/5511981777791?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20na%20Podoclinic."
+         target="_blank" rel="noopener">Agendar</a>
+
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <header class="hero" id="topo">
+    <div class="container">
+
+      <span class="hero__badge">✦ Novo conceito em podologia</span>
+
+      <h1 class="hero__titulo">Seus pés em <em>boas mãos</em>,<br />sua vida com mais conforto.</h1>
+
+      <p class="hero__sub">
+        Podologia especializada no Brooklin: avaliação individualizada,
+        tratamento da causa do problema e cuidado do início ao fim.
+      </p>
+
+      <div class="hero__acoes">
+        <a class="btn" href="https://wa.me/5511981777791?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20na%20Podoclinic."
+           target="_blank" rel="noopener">Agendar consulta →</a>
+        <a class="btn btn--fantasma" href="#clinica">Conheça a clínica</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat__numero">+20</div>
+          <div class="stat__rotulo">anos de experiência clínica</div>
+        </div>
+        <div class="stat">
+          <div class="stat__numero">1:1</div>
+          <div class="stat__rotulo">atendimento individualizado</div>
+        </div>
+        <div class="stat">
+          <div class="stat__numero">100%</div>
+          <div class="stat__rotulo">materiais esterilizados</div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================
+       A CLÍNICA
+       ============================================================ -->
+  <section class="clinica" id="clinica" aria-labelledby="titulo-clinica">
+    <div class="container clinica__grid">
+
+      <div>
+        <span class="eyebrow">A Clínica</span>
+        <h2 class="titulo" id="titulo-clinica">Um espaço pensado para o <em>cuidado</em> dos seus pés.</h2>
+        <p class="sub">
+          Na Podoclinic, unimos técnica e acolhimento. Nossa proposta é oferecer
+          um ambiente seguro e preparado para tratar, aliviar e prevenir —
+          devolvendo saúde, mobilidade e bem-estar em todas as fases da vida.
+        </p>
+
+        <ul class="clinica__lista">
+          <li>
+            <span class="clinica__check">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Avaliação individualizada e plano de cuidado sob medida
+          </li>
+          <li>
+            <span class="clinica__check">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Protocolos rigorosos de biossegurança e materiais esterilizados
+          </li>
+          <li>
+            <span class="clinica__check">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            Localização de fácil acesso no Brooklin, com estacionamento no local
+          </li>
+        </ul>
+      </div>
+
+      <!-- Painel visual — pode ser substituído por uma foto real da clínica -->
+      <div class="clinica__painel" role="img" aria-label="Podoclinic — ambiente de cuidado especializado">
+        <div class="clinica__painel-conteudo">
+          <p class="painel-titulo">Mais de 20 anos<br />cuidando de pés e pessoas.</p>
+          <p class="painel-texto">Experiência clínica em tratamentos podológicos especializados, com foco na causa do problema.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       POR QUE ESCOLHER A PODOCLINIC?
+       ============================================================ -->
+  <section class="porque" id="diferenciais" aria-labelledby="titulo-porque">
+    <div class="container">
+
+      <div class="porque__cabecalho">
+        <span class="eyebrow">Diferenciais</span>
+        <h2 class="titulo" id="titulo-porque">Por que escolher a <em>Podoclinic</em>?</h2>
+        <p class="sub">Seis razões para confiar a saúde dos seus pés a quem entende do assunto.</p>
+      </div>
+
+      <div class="cards">
+
+        <article class="card">
+          <div class="card__icone">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3 class="card__titulo">Atendimento Humanizado</h3>
+          <p class="card__texto">Cada paciente recebe uma avaliação individualizada e um plano de cuidado adequado às suas necessidades.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icone">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="6"/>
+              <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+            </svg>
+          </div>
+          <h3 class="card__titulo">Excelência Técnica</h3>
+          <p class="card__texto">Mais de 20 anos de experiência clínica em tratamentos podológicos especializados.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icone">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <h3 class="card__titulo">Segurança em Primeiro Lugar</h3>
+          <p class="card__texto">Materiais esterilizados e protocolos rigorosos de biossegurança.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icone">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="6"/>
+              <circle cx="12" cy="12" r="2"/>
+            </svg>
+          </div>
+          <h3 class="card__titulo">Foco na Solução</h3>
+          <p class="card__texto">Tratamos a causa do problema, proporcionando alívio, conforto e prevenção.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icone">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3 class="card__titulo">Localização Privilegiada</h3>
+          <p class="card__texto">Fácil acesso no Brooklin, com estacionamento no local.</p>
+        </article>
+
+        <article class="card">
+          <div class="card__icone">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3 class="card__titulo">Compromisso com Resultados</h3>
+          <p class="card__texto">Nosso objetivo é devolver saúde, mobilidade e bem-estar para seus pés.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TRATAMENTOS
+       ============================================================ -->
+  <section class="tratamentos" id="tratamentos" aria-labelledby="titulo-tratamentos">
+    <div class="container">
+
+      <div class="tratamentos__cabecalho">
+        <span class="eyebrow">Tratamentos</span>
+        <h2 class="titulo" id="titulo-tratamentos">Cuidado especializado para <em>cada necessidade</em>.</h2>
+        <p class="sub">Todo tratamento começa com uma avaliação completa para identificar a causa do problema.</p>
+      </div>
+
+      <div class="tratamentos__grid">
+
+        <article class="tratamento">
+          <span class="tratamento__numero">01</span>
+          <div>
+            <h3 class="tratamento__titulo">Unha encravada</h3>
+            <p class="tratamento__texto">Tratamento especializado para aliviar a dor, corrigir o crescimento da unha e prevenir recorrências.</p>
+          </div>
+        </article>
+
+        <article class="tratamento">
+          <span class="tratamento__numero">02</span>
+          <div>
+            <h3 class="tratamento__titulo">Calosidades e rachaduras</h3>
+            <p class="tratamento__texto">Remoção segura e orientação para tratar a causa do atrito, devolvendo conforto ao caminhar.</p>
+          </div>
+        </article>
+
+        <article class="tratamento">
+          <span class="tratamento__numero">03</span>
+          <div>
+            <h3 class="tratamento__titulo">Micose de unhas</h3>
+            <p class="tratamento__texto">Avaliação e acompanhamento podológico para recuperar a saúde e a aparência das unhas.</p>
+          </div>
+        </article>
+
+        <article class="tratamento">
+          <span class="tratamento__numero">04</span>
+          <div>
+            <h3 class="tratamento__titulo">Pé diabético</h3>
+            <p class="tratamento__texto">Cuidado preventivo e contínuo para pacientes diabéticos, com atenção especial à sensibilidade e à pele.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DEPOIMENTOS
+       (Substituir pelos depoimentos reais de pacientes / Google)
+       ============================================================ -->
+  <section class="depoimentos" id="depoimentos" aria-labelledby="titulo-depoimentos">
+    <div class="container">
+
+      <div class="depoimentos__cabecalho">
+        <span class="eyebrow">Depoimentos</span>
+        <h2 class="titulo" id="titulo-depoimentos">Quem cuida dos pés com a gente, <em>recomenda</em>.</h2>
+      </div>
+
+      <div class="depoimentos__grid">
+
+        <blockquote class="depoimento">
+          <div class="depoimento__estrelas" aria-label="5 estrelas">★★★★★</div>
+          <p class="depoimento__texto">"Sofria com unha encravada há anos. Em poucas sessões o problema foi resolvido com todo o cuidado e sem dor."</p>
+          <footer class="depoimento__autor">Paciente Podoclinic<span>Tratamento de unha encravada</span></footer>
+        </blockquote>
+
+        <blockquote class="depoimento">
+          <div class="depoimento__estrelas" aria-label="5 estrelas">★★★★★</div>
+          <p class="depoimento__texto">"Atendimento impecável e ambiente extremamente limpo. Dá para ver o cuidado com a esterilização em cada detalhe."</p>
+          <footer class="depoimento__autor">Paciente Podoclinic<span>Cuidado preventivo</span></footer>
+        </blockquote>
+
+        <blockquote class="depoimento">
+          <div class="depoimento__estrelas" aria-label="5 estrelas">★★★★★</div>
+          <p class="depoimento__texto">"Sou diabética e encontrei na Podoclinic o acompanhamento que precisava. Profissionalismo e atenção de verdade."</p>
+          <footer class="depoimento__autor">Paciente Podoclinic<span>Acompanhamento pé diabético</span></footer>
+        </blockquote>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTATO
+       ============================================================ -->
+  <section class="contato" id="contato" aria-labelledby="titulo-contato">
+    <div class="container contato__grid">
+
+      <div>
+        <span class="eyebrow">Contato</span>
+        <h2 class="titulo" id="titulo-contato">Agende sua <em>consulta</em> hoje.</h2>
+        <p class="sub">
+          Estamos prontos para te receber. Chegue sem preocupação: a clínica
+          conta com estacionamento no local, para que sua consulta seja prática
+          e tranquila do início ao fim.
+        </p>
+
+        <div class="contato__info">
+
+          <div class="contato__bloco">
+            <span class="contato__icone">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </span>
+            <div>
+              <h3>Localização</h3>
+              <p>Av. Portugal, 184 · Brooklin, São Paulo – SP</p>
+              <a class="link-mapa" href="https://www.google.com/maps/search/?api=1&query=Av.+Portugal,+184+-+Brooklin,+S%C3%A3o+Paulo+-+SP" target="_blank" rel="noopener">Ver no mapa →</a>
+            </div>
+          </div>
+
+          <div class="contato__bloco">
+            <span class="contato__icone">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </span>
+            <div>
+              <h3>Horários</h3>
+              <p>Seg–Sex 10h–19h · Sáb 10h–13h · Dom Fechado</p>
+            </div>
+          </div>
+
+          <div class="contato__bloco">
+            <span class="contato__icone">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h13l4 4v4a2 2 0 0 1-2 2h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>
+              </svg>
+            </span>
+            <div>
+              <h3>Estacionamento</h3>
+              <p>Estacionamento no local — chegue com praticidade e tranquilidade.</p>
+            </div>
+          </div>
+
+          <div class="contato__bloco">
+            <span class="contato__icone">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.36 13.5 19.79 19.79 0 0 1 1.32 4.9 2 2 0 0 1 3.29 2.72h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 5.49 5.49l1.24-1.63a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2z"/>
+              </svg>
+            </span>
+            <div>
+              <h3>WhatsApp</h3>
+              <p>(11) 98177-7791</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer__grid">
+
+        <div class="footer__marca">
+          <span class="logo-marca logo-marca--claro" aria-label="Podoclinic">
+            <span class="logo-marca__texto">
+              <span class="logo-marca__nome">PODOCLINIC</span>
+              <span class="logo-marca__sub">Clínica de Podologia</span>
+            </span>
+            <svg class="logo-marca__pes" viewBox="0 0 210 260" fill="currentColor" aria-hidden="true">
+              <g transform="rotate(14 60 110)">
+                <ellipse cx="60" cy="135" rx="30" ry="57"/>
+                <ellipse cx="32" cy="56" rx="12" ry="14"/>
+                <circle cx="54" cy="41" r="9"/>
+                <circle cx="71" cy="35" r="8"/>
+                <circle cx="86" cy="37" r="7"/>
+                <circle cx="98" cy="44" r="6"/>
+              </g>
+              <g transform="translate(76 52) scale(.94) rotate(20 60 110)">
+                <ellipse cx="60" cy="135" rx="30" ry="57"/>
+                <ellipse cx="32" cy="56" rx="12" ry="14"/>
+                <circle cx="54" cy="41" r="9"/>
+                <circle cx="71" cy="35" r="8"/>
+                <circle cx="86" cy="37" r="7"/>
+                <circle cx="98" cy="44" r="6"/>
+              </g>
+            </svg>
+          </span>
+          <p>Novo conceito em podologia. Atendimento humanizado, excelência técnica e compromisso com a saúde dos seus pés.</p>
+        </div>
+
+        <div>
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#clinica">A Clínica</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#tratamentos">Tratamentos</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contato</h4>
+          <ul>
+            <li>Av. Portugal, 184 · Brooklin, SP</li>
+            <li>(11) 98177-7791</li>
+            <li>Seg–Sex 10h–19h · Sáb 10h–13h</li>
+            <li>Estacionamento no local</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__base">
+        <p>© 2026 Podoclinic. Todos os direitos reservados.</p>
+        <p>Novo conceito em podologia.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       BOTÃO FLUTUANTE WHATSAPP
+       ============================================================ -->
+  <a class="whats-flutuante"
+     href="https://wa.me/5511981777791?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20na%20Podoclinic."
+     target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16.04 3C9.4 3 4 8.36 4 14.96c0 2.36.7 4.56 1.9 6.42L4 29l7.84-1.84a12.1 12.1 0 0 0 4.2.76C22.68 27.92 28 22.56 28 15.96 28 8.36 22.68 3 16.04 3zm0 21.84c-1.32 0-2.6-.28-3.76-.8l-.28-.16-4.64 1.08 1.12-4.4-.2-.32a9.81 9.81 0 0 1-1.6-5.28c0-5.44 4.48-9.88 9.96-9.88 5.48 0 9.4 4.44 9.4 9.88 0 5.44-4.52 9.88-10 9.88zm5.48-7.4c-.3-.16-1.76-.88-2.04-.96-.28-.12-.48-.16-.68.12-.2.32-.76.96-.92 1.16-.16.2-.36.24-.64.08-.3-.16-1.26-.46-2.4-1.48-.88-.8-1.48-1.76-1.66-2.06-.16-.32-.02-.48.14-.64.14-.14.3-.36.46-.54.16-.18.2-.32.32-.52.1-.2.04-.4-.02-.56-.08-.16-.68-1.64-.94-2.24-.24-.6-.5-.5-.68-.52h-.58c-.2 0-.52.08-.8.4-.28.32-1.04 1.02-1.04 2.48s1.06 2.88 1.22 3.08c.16.2 2.1 3.2 5.08 4.48.72.3 1.26.48 1.7.62.7.22 1.34.2 1.84.12.56-.08 1.76-.72 2-1.42.26-.7.26-1.28.18-1.42-.08-.12-.28-.2-.58-.36z"/>
+    </svg>
+  </a>
+
+
+</body>
+</html>
