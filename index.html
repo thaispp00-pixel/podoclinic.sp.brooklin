@@ -168,53 +168,21 @@
       padding-block: 12px;
     }
 
-    /* — Logo Podoclinic (vetorial) — */
+    /* — Logo Podoclinic (marca oficial) — */
     .logo-marca {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      color: var(--cor-verde);
     }
 
-    .logo-marca__texto {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-
-    .logo-marca__nome {
-      font-family: 'Poppins', var(--fonte-base);
-      font-weight: 700;
-      font-size: 21px;
-      letter-spacing: .3px;
-      color: var(--cor-verde);
-    }
-
-    .logo-marca__sub {
-      font-family: 'Poppins', var(--fonte-base);
-      font-weight: 500;
-      font-size: 11px;
-      letter-spacing: .2px;
-      color: var(--cor-verde);
-      margin-top: 3px;
-    }
-
-    .logo-marca__pes {
-      height: 34px;
+    .logo-marca__img {
+      height: 44px;
       width: auto;
+      display: block;
       flex-shrink: 0;
     }
 
-    /* Variante clara (fundo escuro do rodapé) */
-    .logo-marca--claro,
-    .logo-marca--claro .logo-marca__nome {
-      color: var(--cor-branco);
-    }
-    .logo-marca--claro .logo-marca__sub {
-      color: var(--cor-verde-accent);
-    }
-    .logo-marca--claro .logo-marca__pes {
-      color: var(--cor-verde-accent);
+    .logo-marca--claro {
+      display: inline-flex;
     }
 
     .nav__links {
@@ -640,8 +608,8 @@
     .footer__marca .logo-marca {
       margin-bottom: 14px;
     }
-    .footer__marca .logo-marca__pes {
-      height: 38px;
+    .footer__marca .logo-marca__img {
+      height: 40px;
     }
 
     .footer__marca p {
@@ -725,28 +693,7 @@
     <div class="container nav__inner">
 
       <a class="nav__logo logo-marca" href="#topo" aria-label="Podoclinic — início">
-        <span class="logo-marca__texto">
-          <span class="logo-marca__nome">PODOCLINIC</span>
-          <span class="logo-marca__sub">Clínica de Podologia</span>
-        </span>
-        <svg class="logo-marca__pes" viewBox="0 0 210 260" fill="currentColor" aria-hidden="true">
-          <g transform="rotate(14 60 110)">
-            <ellipse cx="60" cy="135" rx="30" ry="57"/>
-            <ellipse cx="32" cy="56" rx="12" ry="14"/>
-            <circle cx="54" cy="41" r="9"/>
-            <circle cx="71" cy="35" r="8"/>
-            <circle cx="86" cy="37" r="7"/>
-            <circle cx="98" cy="44" r="6"/>
-          </g>
-          <g transform="translate(76 52) scale(.94) rotate(20 60 110)">
-            <ellipse cx="60" cy="135" rx="30" ry="57"/>
-            <ellipse cx="32" cy="56" rx="12" ry="14"/>
-            <circle cx="54" cy="41" r="9"/>
-            <circle cx="71" cy="35" r="8"/>
-            <circle cx="86" cy="37" r="7"/>
-            <circle cx="98" cy="44" r="6"/>
-          </g>
-        </svg>
+        <img class="logo-marca__img" src="assets/logo-podoclinic-lockup.png" alt="Podoclinic — Clínica de Podologia">
       </a>
 
       <div class="nav__links">
@@ -1102,28 +1049,7 @@
 
         <div class="footer__marca">
           <span class="logo-marca logo-marca--claro" aria-label="Podoclinic">
-            <span class="logo-marca__texto">
-              <span class="logo-marca__nome">PODOCLINIC</span>
-              <span class="logo-marca__sub">Clínica de Podologia</span>
-            </span>
-            <svg class="logo-marca__pes" viewBox="0 0 210 260" fill="currentColor" aria-hidden="true">
-              <g transform="rotate(14 60 110)">
-                <ellipse cx="60" cy="135" rx="30" ry="57"/>
-                <ellipse cx="32" cy="56" rx="12" ry="14"/>
-                <circle cx="54" cy="41" r="9"/>
-                <circle cx="71" cy="35" r="8"/>
-                <circle cx="86" cy="37" r="7"/>
-                <circle cx="98" cy="44" r="6"/>
-              </g>
-              <g transform="translate(76 52) scale(.94) rotate(20 60 110)">
-                <ellipse cx="60" cy="135" rx="30" ry="57"/>
-                <ellipse cx="32" cy="56" rx="12" ry="14"/>
-                <circle cx="54" cy="41" r="9"/>
-                <circle cx="71" cy="35" r="8"/>
-                <circle cx="86" cy="37" r="7"/>
-                <circle cx="98" cy="44" r="6"/>
-              </g>
-            </svg>
+            <img class="logo-marca__img" src="assets/logo-podoclinic-white.png" alt="Podoclinic — Clínica de Podologia">
           </span>
           <p>Novo conceito em podologia. Atendimento humanizado, excelência técnica e compromisso com a saúde dos seus pés.</p>
         </div>
